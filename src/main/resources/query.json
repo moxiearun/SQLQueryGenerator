@@ -1,0 +1,21 @@
+{
+  "queryType": "select",
+  "tableName": "products",
+  "isRequiredAllColumns": false,
+  "isDistinctRequired": true,
+  "columns": [
+    "productID"
+  ],
+  "clause": {
+    "clauseType": "where",
+    "columns": [
+    ]
+  },
+  "conditions": [
+    {
+      "columnName": "productName",
+      "operatorType": "like",
+      "conditionValue": "mobile"
+    }
+  ]
+}
