@@ -1,10 +1,11 @@
 {
-  "queryType": "drop",
+  "queryType": "select",
   "tableName": "products",
   "isRequiredAllColumns": false,
-  "isDistinctRequired": true,
+  "isDistinctRequired": false,
   "columns": [
-    "productID"
+    "productID",
+    "productPrice"
   ],
   "clauses": [
     {
@@ -14,7 +15,7 @@
       ]
     },
     {
-      "clauseType": "havin"
+      "clauseType": "having"
     }
   ],
   "conditions": [

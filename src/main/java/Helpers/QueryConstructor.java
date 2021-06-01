@@ -28,10 +28,10 @@ public class QueryConstructor {
     public void constructQuery(QueryDisplayListener queryDisplayListener) {
         this.queryDisplayListener = queryDisplayListener;
         switch (sqlQueryInputs.queryType) {
-            case "select":
+            case Constants.QUERY_TYPE_SELECT:
                 constructSelectQuery();
                 break;
-            case "drop":
+            case Constants.QUERY_TYPE_DROP:
                 constructDropQuery();
                 break;
         }
@@ -44,7 +44,7 @@ public class QueryConstructor {
         try {
 
             StringBuilder sqlQueryBuilder = new StringBuilder();
-            sqlQueryBuilder.append(Constants.QUERY_TYPE_SELECT);
+            sqlQueryBuilder.append(Constants.QUERY_SELECT);
             // Add distinct if needed
             if (sqlQueryInputs.isDistinctRequired) {
                 sqlQueryBuilder.append(Constants.SPACE).append(Constants.DISTINCT);
@@ -53,6 +53,7 @@ public class QueryConstructor {
             appendTableName(sqlQueryBuilder);
             appendClause(sqlQueryBuilder);
             appendConditions(sqlQueryBuilder);
+            sqlQueryBuilder.append(Constants.SEMI_COLON);
             queryDisplayListener.displayConstructedQuery(sqlQueryBuilder.toString());
 
         } catch (NoSuchClauseFoundException noSuchClauseFoundException) {
@@ -66,8 +67,9 @@ public class QueryConstructor {
     private void constructDropQuery() {
 
         StringBuilder sqlQueryBuilder = new StringBuilder();
-        sqlQueryBuilder.append(Constants.QUERY_TYPE_DROP);
+        sqlQueryBuilder.append(Constants.QUERY_DROP);
         appendTableName(sqlQueryBuilder);
+        sqlQueryBuilder.append(Constants.SEMI_COLON);
         queryDisplayListener.displayConstructedQuery(sqlQueryBuilder.toString());
     }
 
@@ -183,7 +185,7 @@ public class QueryConstructor {
                 //Avoiding comma for last column name
                 break;
             }
-            sqlQueryBuilder.append(",");
+            sqlQueryBuilder.append(Constants.COMMA);
         }
     }
 }
