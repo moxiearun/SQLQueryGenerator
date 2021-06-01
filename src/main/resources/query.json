@@ -1,5 +1,5 @@
 {
-  "queryType": "select",
+  "queryType": "drop",
   "tableName": "products",
   "isRequiredAllColumns": false,
   "isDistinctRequired": true,
@@ -14,7 +14,7 @@
       ]
     },
     {
-      "clauseType": "having"
+      "clauseType": "havin"
     }
   ],
   "conditions": [

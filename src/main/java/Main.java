@@ -25,6 +25,11 @@ public class Main {
             public void displayConstructedQuery(String query) {
                 System.out.println(query);
             }
+
+            @Override
+            public void displayException(String exceptionMessage) {
+                System.out.println(exceptionMessage);
+            }
         });
     }
 }

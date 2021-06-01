@@ -6,6 +6,7 @@ public class Constants {
     public static final String FROM = "FROM";
     public static final String TABLE = "TABLE";
     public static final String DISTINCT = "DISTINCT";
+    public static final String MESSAGE_NO_CLAUSE_FOUND_EXCEPTION = "No such clause is supported! Please verify inputs.";
 
     //Clauses
     public static final String CLAUSE_WHERE = "WHERE";

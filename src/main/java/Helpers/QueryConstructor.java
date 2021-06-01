@@ -1,5 +1,6 @@
 package Helpers;
 
+import Exceptions.NoSuchClauseFoundException;
 import Interfaces.QueryDisplayListener;
 import Models.Clause;
 import Models.Condition;
@@ -23,9 +24,6 @@ public class QueryConstructor {
             case "select":
                 constructSelectQuery();
                 break;
-            case "alter":
-                constructAlterQuery();
-                break;
             case "drop":
                 constructDropQuery();
                 break;
@@ -33,35 +31,33 @@ public class QueryConstructor {
     }
 
     private void constructSelectQuery() {
-        StringBuilder sqlQueryBuilder = new StringBuilder();
-        sqlQueryBuilder.append(Constants.QUERY_TYPE_SELECT);
-        // Add distinct if needed
-        if (sqlQueryInputs.isDistinctRequired) {
-            sqlQueryBuilder.append(Constants.SPACE).append(Constants.DISTINCT);
-        }
-        appendColumnName(sqlQueryBuilder);
-        appendTableName(sqlQueryBuilder);
-        appendClause(sqlQueryBuilder);
-        appendConditions(sqlQueryBuilder);
-        queryDisplayListener.displayConstructedQuery(sqlQueryBuilder.toString());
-    }
+        try {
 
-    private void constructAlterQuery() {
-        StringBuilder sqlQueryBuilder = new StringBuilder();
-        sqlQueryBuilder.append(Constants.QUERY_TYPE_ALTER);
-        appendTableName(sqlQueryBuilder);
-        appendClause(sqlQueryBuilder);
-        appendConditions(sqlQueryBuilder);
-        queryDisplayListener.displayConstructedQuery(sqlQueryBuilder.toString());
+            StringBuilder sqlQueryBuilder = new StringBuilder();
+            sqlQueryBuilder.append(Constants.QUERY_TYPE_SELECT);
+            // Add distinct if needed
+            if (sqlQueryInputs.isDistinctRequired) {
+                sqlQueryBuilder.append(Constants.SPACE).append(Constants.DISTINCT);
+            }
+            appendColumnName(sqlQueryBuilder);
+            appendTableName(sqlQueryBuilder);
+            appendClause(sqlQueryBuilder);
+            appendConditions(sqlQueryBuilder);
+            queryDisplayListener.displayConstructedQuery(sqlQueryBuilder.toString());
+
+        } catch (NoSuchClauseFoundException noSuchClauseFoundException) {
+            queryDisplayListener.displayException(noSuchClauseFoundException.getExceptionMessage());
+        }
     }
 
     private void constructDropQuery() {
+
         StringBuilder sqlQueryBuilder = new StringBuilder();
         sqlQueryBuilder.append(Constants.QUERY_TYPE_DROP);
         appendTableName(sqlQueryBuilder);
-        appendClause(sqlQueryBuilder);
-        appendConditions(sqlQueryBuilder);
         queryDisplayListener.displayConstructedQuery(sqlQueryBuilder.toString());
+
+
     }
 
     private void appendColumnName(StringBuilder sqlQueryBuilder) {
@@ -83,7 +79,7 @@ public class QueryConstructor {
         sqlQueryBuilder.append(Constants.SPACE).append(sqlQueryInputs.tableName);
     }
 
-    private void appendClause(StringBuilder sqlQueryBuilder) {
+    private void appendClause(StringBuilder sqlQueryBuilder) throws NoSuchClauseFoundException {
         if (sqlQueryInputs.clauses == null || sqlQueryInputs.clauses.size() < 1) {
             return;
         }
@@ -91,7 +87,7 @@ public class QueryConstructor {
             sqlQueryBuilder.append(Constants.SPACE);
             switch (clause.clauseType) {
                 case Constants.CLAUSE_TYPE_WHERE:
-                sqlQueryBuilder.append(Constants.CLAUSE_WHERE);
+                    sqlQueryBuilder.append(Constants.CLAUSE_WHERE);
                     break;
                 case Constants.CLAUSE_TYPE_ORDER_BY:
                     sqlQueryBuilder.append(Constants.CLAUSE_ORDER_BY);
@@ -104,6 +100,8 @@ public class QueryConstructor {
                 case Constants.CLAUSE_TYPE_HAVING:
                     sqlQueryBuilder.append(Constants.CLAUSE_HAVING);
                     break;
+                default:
+                    throw new NoSuchClauseFoundException(Constants.MESSAGE_NO_CLAUSE_FOUND_EXCEPTION);
             }
         }
     }
