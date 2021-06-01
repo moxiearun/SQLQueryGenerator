@@ -91,10 +91,21 @@ public class QueryConstructor {
                 sqlQueryBuilder.append(Constants.SPACE).append(Constants.CLAUSE_ORDER_BY);
                 iterateColumns(sqlQueryInputs.clause.columns, sqlQueryBuilder);
                 break;
+            case Constants.CLAUSE_TYPE_GROUP_BY:
+                sqlQueryBuilder.append(Constants.SPACE).append(Constants.CLAUSE_GROUP_BY);
+                iterateColumns(sqlQueryInputs.clause.columns, sqlQueryBuilder);
+                break;
+            case Constants.CLAUSE_TYPE_HAVING:
+                sqlQueryBuilder.append(Constants.SPACE).append(Constants.CLAUSE_HAVING);
+                break;
+
         }
     }
 
     private void appendConditions(StringBuilder sqlQueryBuilder) {
+        if (sqlQueryInputs.conditions == null || sqlQueryInputs.conditions.size() < 1) {
+            return;
+        }
         for (Condition condition : sqlQueryInputs.conditions) {
             sqlQueryBuilder.append(Constants.SPACE).append(condition.columnName);
             sqlQueryBuilder.append(Constants.SPACE);

@@ -7,15 +7,16 @@
     "productID"
   ],
   "clause": {
-    "clauseType": "where",
+    "clauseType": "having",
     "columns": [
+      "brandName"
     ]
   },
   "conditions": [
     {
-      "columnName": "productName",
-      "operatorType": "like",
-      "conditionValue": "mobile"
+      "columnName": "productAvailability",
+      "operatorType": "equal_to",
+      "conditionValue": "YES"
     }
   ]
 }

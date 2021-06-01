@@ -10,10 +10,14 @@ public class Constants {
     //Clauses
     public static final String CLAUSE_WHERE = "WHERE";
     public static final String CLAUSE_ORDER_BY = "ORDER BY";
+    public static final String CLAUSE_GROUP_BY = "GROUP BY";
+    public static final String CLAUSE_HAVING = "HAVING";
 
     //Clause types
     public static final String CLAUSE_TYPE_WHERE = "where";
     public static final String CLAUSE_TYPE_ORDER_BY = "order_by";
+    public static final String CLAUSE_TYPE_GROUP_BY = "group_by";
+    public static final String CLAUSE_TYPE_HAVING = "having";
 
     //Query types
     public static final String QUERY_TYPE_SELECT = "SELECT";
