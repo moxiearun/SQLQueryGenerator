@@ -9,20 +9,17 @@
   ],
   "clauses": [
     {
-      "clauseType" : "order_by",
+      "clauseType" : "where",
       "columns": [
         "brandName"
       ]
-    },
-    {
-      "clauseType": "having"
     }
   ],
   "conditions": [
     {
-      "columnName": "productAvailability",
-      "operatorType": "equal_to",
-      "conditionValue": "YES"
+      "columnName": "productName",
+      "operatorType": "between",
+      "conditionValues": ["dhal", "masala"]
     }
   ]
 }

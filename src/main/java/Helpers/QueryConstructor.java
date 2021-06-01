@@ -23,6 +23,7 @@ public class QueryConstructor {
 
     /**
      * Identifies query type.
+     *
      * @param queryDisplayListener to display query or exception messages if encountered.
      */
     public void constructQuery(QueryDisplayListener queryDisplayListener) {
@@ -81,7 +82,7 @@ public class QueryConstructor {
         if (sqlQueryInputs.isRequiredAllColumns) {
             sqlQueryBuilder.append(Constants.SPACE).append(Constants.ALL_COLUMNS);
         } else {
-            iterateColumns(sqlQueryInputs.columns, sqlQueryBuilder);
+            iterateList(sqlQueryInputs.columns, sqlQueryBuilder);
         }
     }
 
@@ -100,6 +101,7 @@ public class QueryConstructor {
 
     /**
      * Appends clauses along with column names.
+     *
      * @throws NoSuchClauseFoundException can be thrown when invalid clause type found in query inputs.
      */
     private void appendClause(StringBuilder sqlQueryBuilder) throws NoSuchClauseFoundException {
@@ -114,11 +116,11 @@ public class QueryConstructor {
                     break;
                 case Constants.CLAUSE_TYPE_ORDER_BY:
                     sqlQueryBuilder.append(Constants.CLAUSE_ORDER_BY);
-                    iterateColumns(clause.columns, sqlQueryBuilder);
+                    iterateList(clause.columns, sqlQueryBuilder);
                     break;
                 case Constants.CLAUSE_TYPE_GROUP_BY:
                     sqlQueryBuilder.append(Constants.CLAUSE_GROUP_BY);
-                    iterateColumns(clause.columns, sqlQueryBuilder);
+                    iterateList(clause.columns, sqlQueryBuilder);
                     break;
                 case Constants.CLAUSE_TYPE_HAVING:
                     sqlQueryBuilder.append(Constants.CLAUSE_HAVING);
@@ -169,19 +171,28 @@ public class QueryConstructor {
                     break;
             }
             sqlQueryBuilder.append(Constants.SPACE);
-            sqlQueryBuilder.append(condition.conditionValue);
+            if (condition.operatorType.equals(Constants.OPERATOR_TYPE_LIKE)
+                    || condition.operatorType.equals(Constants.OPERATOR_TYPE_IN)) {
+                iterateList(condition.conditionValues, sqlQueryBuilder);
+            } else if (condition.operatorType.equals(Constants.OPERATOR_TYPE_BETWEEN) && condition.conditionValues.size() == 2) {
+                sqlQueryBuilder.append(condition.conditionValues.get(0)).append(Constants.SPACE).append("AND")
+                        .append(Constants.SPACE).append(condition.conditionValues.get(1));
+            } else if (condition.conditionValues != null && condition.conditionValues.get(0) != null) {
+                sqlQueryBuilder.append(condition.conditionValues.get(0));
+            }
         }
     }
 
     /**
      * Appends column names when its specifically mentioned in query inputs.
-     * @param columns list of columns to displayed or considered in clause operations.
+     *
+     * @param list list of columns to displayed or considered in clause operations.
      */
-    private void iterateColumns(List<String> columns, StringBuilder sqlQueryBuilder) {
-        Iterator<String> columnNameIterator = columns.iterator();
-        while (columnNameIterator.hasNext()) {
-            sqlQueryBuilder.append(Constants.SPACE).append(columnNameIterator.next());
-            if (!columnNameIterator.hasNext()) {
+    private void iterateList(List<String> list, StringBuilder sqlQueryBuilder) {
+        Iterator<String> listIterator = list.iterator();
+        while (listIterator.hasNext()) {
+            sqlQueryBuilder.append(Constants.SPACE).append(listIterator.next());
+            if (!listIterator.hasNext()) {
                 //Avoiding comma for last column name
                 break;
             }
