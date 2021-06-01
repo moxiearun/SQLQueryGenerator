@@ -18,8 +18,8 @@ public class QueryInputsReader {
     }
 
     /**
-     *
-     * @return
+     * Reads the query inputs from json file and returns as JSONObject
+     * @return query inputs from json file
      */
     public JSONObject readQueryInputs() {
         JSONObject queryInputs = null;

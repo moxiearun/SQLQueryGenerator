@@ -9,6 +9,9 @@ import Models.Query;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * QueryConstructor construct SQL query based on the query inputs provided
+ */
 public class QueryConstructor {
 
     private final Query sqlQueryInputs;
@@ -18,6 +21,10 @@ public class QueryConstructor {
         this.sqlQueryInputs = sqlQueryInputs;
     }
 
+    /**
+     * Identifies query type.
+     * @param queryDisplayListener to display query or exception messages if encountered.
+     */
     public void constructQuery(QueryDisplayListener queryDisplayListener) {
         this.queryDisplayListener = queryDisplayListener;
         switch (sqlQueryInputs.queryType) {
@@ -30,6 +37,9 @@ public class QueryConstructor {
         }
     }
 
+    /**
+     * Constructs select queries which will fetch data from table.
+     */
     private void constructSelectQuery() {
         try {
 
@@ -50,16 +60,20 @@ public class QueryConstructor {
         }
     }
 
+    /**
+     * Constructs drop query which will drop the table from database.
+     */
     private void constructDropQuery() {
 
         StringBuilder sqlQueryBuilder = new StringBuilder();
         sqlQueryBuilder.append(Constants.QUERY_TYPE_DROP);
         appendTableName(sqlQueryBuilder);
         queryDisplayListener.displayConstructedQuery(sqlQueryBuilder.toString());
-
-
     }
 
+    /**
+     * Appends column names or * to the query
+     */
     private void appendColumnName(StringBuilder sqlQueryBuilder) {
 
         if (sqlQueryInputs.isRequiredAllColumns) {
@@ -69,6 +83,9 @@ public class QueryConstructor {
         }
     }
 
+    /**
+     * Appends table name to the query with appropriate prefix (FROM/TABLE)
+     */
     private void appendTableName(StringBuilder sqlQueryBuilder) {
         sqlQueryBuilder.append(Constants.SPACE);
         if (sqlQueryInputs.queryType.equals(Constants.QUERY_TYPE_SELECT.toLowerCase())) {
@@ -79,6 +96,10 @@ public class QueryConstructor {
         sqlQueryBuilder.append(Constants.SPACE).append(sqlQueryInputs.tableName);
     }
 
+    /**
+     * Appends clauses along with column names.
+     * @throws NoSuchClauseFoundException can be thrown when invalid clause type found in query inputs.
+     */
     private void appendClause(StringBuilder sqlQueryBuilder) throws NoSuchClauseFoundException {
         if (sqlQueryInputs.clauses == null || sqlQueryInputs.clauses.size() < 1) {
             return;
@@ -106,6 +127,9 @@ public class QueryConstructor {
         }
     }
 
+    /**
+     * Appends conditions with operators.
+     */
     private void appendConditions(StringBuilder sqlQueryBuilder) {
         if (sqlQueryInputs.conditions == null || sqlQueryInputs.conditions.size() < 1) {
             return;
@@ -147,6 +171,10 @@ public class QueryConstructor {
         }
     }
 
+    /**
+     * Appends column names when its specifically mentioned in query inputs.
+     * @param columns list of columns to displayed or considered in clause operations.
+     */
     private void iterateColumns(List<String> columns, StringBuilder sqlQueryBuilder) {
         Iterator<String> columnNameIterator = columns.iterator();
         while (columnNameIterator.hasNext()) {

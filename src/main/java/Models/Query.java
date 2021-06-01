@@ -2,6 +2,9 @@ package Models;
 
 import java.util.List;
 
+/**
+ * Model class to store query inputs
+ */
 public class Query {
     public String queryType;
     public String tableName;

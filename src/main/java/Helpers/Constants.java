@@ -6,6 +6,8 @@ public class Constants {
     public static final String FROM = "FROM";
     public static final String TABLE = "TABLE";
     public static final String DISTINCT = "DISTINCT";
+
+    //Custom exception messages
     public static final String MESSAGE_NO_CLAUSE_FOUND_EXCEPTION = "No such clause is supported! Please verify inputs.";
 
     //Clauses
@@ -20,10 +22,15 @@ public class Constants {
     public static final String CLAUSE_TYPE_GROUP_BY = "group_by";
     public static final String CLAUSE_TYPE_HAVING = "having";
 
+    //Query type inputs
+    public static final String QUERY_TYPE_SELECT = "select";
+    public static final String QUERY_TYPE_ALTER = "alter";
+    public static final String QUERY_TYPE_DROP = "drop";
+
     //Query types
-    public static final String QUERY_TYPE_SELECT = "SELECT";
-    public static final String QUERY_TYPE_ALTER = "ALTER";
-    public static final String QUERY_TYPE_DROP = "DROP";
+    public static final String QUERY_SELECT = "SELECT";
+    public static final String QUERY_ALTER = "ALTER";
+    public static final String QUERY_DROP = "DROP";
 
     // Operators
     public static final String OPERATOR_EQUAL_TO = "=";
