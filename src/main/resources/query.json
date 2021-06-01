@@ -6,12 +6,17 @@
   "columns": [
     "productID"
   ],
-  "clause": {
-    "clauseType": "having",
-    "columns": [
-      "brandName"
-    ]
-  },
+  "clauses": [
+    {
+      "clauseType" : "order_by",
+      "columns": [
+        "brandName"
+      ]
+    },
+    {
+      "clauseType": "having"
+    }
+  ],
   "conditions": [
     {
       "columnName": "productAvailability",

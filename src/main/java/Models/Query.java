@@ -8,6 +8,6 @@ public class Query {
     public boolean isDistinctRequired;
     public boolean isRequiredAllColumns;
     public List<String> columns;
-    public Clause clause;
+    public List<Clause> clauses;
     public List<Condition> conditions;
 }

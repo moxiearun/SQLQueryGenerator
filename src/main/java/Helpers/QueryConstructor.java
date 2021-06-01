@@ -1,6 +1,7 @@
 package Helpers;
 
 import Interfaces.QueryDisplayListener;
+import Models.Clause;
 import Models.Condition;
 import Models.Query;
 
@@ -17,7 +18,7 @@ public class QueryConstructor {
     }
 
     public void constructQuery(QueryDisplayListener queryDisplayListener) {
-    this.queryDisplayListener = queryDisplayListener;
+        this.queryDisplayListener = queryDisplayListener;
         switch (sqlQueryInputs.queryType) {
             case "select":
                 constructSelectQuery();
@@ -83,22 +84,27 @@ public class QueryConstructor {
     }
 
     private void appendClause(StringBuilder sqlQueryBuilder) {
-        switch (sqlQueryInputs.clause.clauseType) {
-            case Constants.CLAUSE_TYPE_WHERE:
-                sqlQueryBuilder.append(Constants.SPACE).append(Constants.CLAUSE_WHERE);
-                break;
-            case Constants.CLAUSE_TYPE_ORDER_BY:
-                sqlQueryBuilder.append(Constants.SPACE).append(Constants.CLAUSE_ORDER_BY);
-                iterateColumns(sqlQueryInputs.clause.columns, sqlQueryBuilder);
-                break;
-            case Constants.CLAUSE_TYPE_GROUP_BY:
-                sqlQueryBuilder.append(Constants.SPACE).append(Constants.CLAUSE_GROUP_BY);
-                iterateColumns(sqlQueryInputs.clause.columns, sqlQueryBuilder);
-                break;
-            case Constants.CLAUSE_TYPE_HAVING:
-                sqlQueryBuilder.append(Constants.SPACE).append(Constants.CLAUSE_HAVING);
-                break;
-
+        if (sqlQueryInputs.clauses == null || sqlQueryInputs.clauses.size() < 1) {
+            return;
+        }
+        for (Clause clause : sqlQueryInputs.clauses) {
+            sqlQueryBuilder.append(Constants.SPACE);
+            switch (clause.clauseType) {
+                case Constants.CLAUSE_TYPE_WHERE:
+                sqlQueryBuilder.append(Constants.CLAUSE_WHERE);
+                    break;
+                case Constants.CLAUSE_TYPE_ORDER_BY:
+                    sqlQueryBuilder.append(Constants.CLAUSE_ORDER_BY);
+                    iterateColumns(clause.columns, sqlQueryBuilder);
+                    break;
+                case Constants.CLAUSE_TYPE_GROUP_BY:
+                    sqlQueryBuilder.append(Constants.CLAUSE_GROUP_BY);
+                    iterateColumns(clause.columns, sqlQueryBuilder);
+                    break;
+                case Constants.CLAUSE_TYPE_HAVING:
+                    sqlQueryBuilder.append(Constants.CLAUSE_HAVING);
+                    break;
+            }
         }
     }
 
