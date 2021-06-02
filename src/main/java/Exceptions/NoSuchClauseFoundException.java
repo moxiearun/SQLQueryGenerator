@@ -3,7 +3,7 @@ package Exceptions;
 /**
  * NoSuchClauseFoundException will notify when invalid clause type is given in query inputs
  */
-public class NoSuchClauseFoundException extends Exception{
+public class NoSuchClauseFoundException extends Exception {
 
     private final String exceptionMessage;
 

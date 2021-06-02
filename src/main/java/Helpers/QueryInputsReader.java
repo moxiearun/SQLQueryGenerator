@@ -19,13 +19,14 @@ public class QueryInputsReader {
 
     /**
      * Reads the query inputs from json file and returns as JSONObject
+     *
      * @return query inputs from json file
      */
     public JSONObject readQueryInputs() {
         JSONObject queryInputs = null;
         try {
             JSONParser jsonParser = new JSONParser();
-             queryInputs= (JSONObject) jsonParser.parse(new FileReader(queryFilePath));
+            queryInputs = (JSONObject) jsonParser.parse(new FileReader(queryFilePath));
 
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
