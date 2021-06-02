@@ -16,7 +16,7 @@ public class Main {
 
         // Reads the json file and returns the query inputs as json object
         JSONObject queryInputs =
-                new QueryInputsReader("/Users/755774/IdeaProjects/SQLQueryGenerator/src/main/resources/query.json")
+                new QueryInputsReader("../resources/query.json")
                         .readQueryInputs();
 
         // Converts the json object into objects
