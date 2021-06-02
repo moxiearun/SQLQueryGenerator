@@ -18,8 +18,8 @@
   "conditions": [
     {
       "columnName": "productName",
-      "operatorType": "between",
-      "conditionValues": ["dhal", "masala"]
+      "operatorType": "equal_to",
+      "conditionValues": ["Coffee"]
     }
   ]
 }
