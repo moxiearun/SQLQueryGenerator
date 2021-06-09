@@ -21,6 +21,7 @@ public class DropQueryBuilder extends QueryBuilder {
     /**
      * Constructs drop query which will drop the table from database.
      */
+    @Override
     public void constructQuery() {
         super.constructQuery();
         sqlQueryBuilder.append(Constants.QUERY_DROP);
@@ -33,6 +34,6 @@ public class DropQueryBuilder extends QueryBuilder {
      * Appends table name to the query with appropriate prefix (TABLE)
      */
     private void appendTableName() {
-        super.appendTable(Constants.TABLE, dropQueryInputs.tableName);
+        super.appendTableName(Constants.TABLE, dropQueryInputs.primaryTableName);
     }
 }

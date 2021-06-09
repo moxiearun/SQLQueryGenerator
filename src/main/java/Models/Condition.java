@@ -9,4 +9,6 @@ public class Condition {
     public String columnName;
     public String operatorType;
     public List<String> conditionValues;
+    public String tableName;
+    public Condition condition;
 }

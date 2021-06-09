@@ -8,6 +8,6 @@ import java.util.List;
 public class Clause {
 
     public String clauseType;
-    public List<String> columns;
+    public List<Column> columns;
 
 }

@@ -27,7 +27,6 @@ public class QueryInputsReader {
         try {
             JSONParser jsonParser = new JSONParser();
             queryInputs = (JSONObject) jsonParser.parse(new FileReader(queryFilePath));
-
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
         }

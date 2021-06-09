@@ -14,6 +14,6 @@ public interface QueryDisplayListener {
      *
      * @param exceptionMessage Exception specific message
      */
-    public void displayException(String exceptionMessage);
+    public void showException(String exceptionMessage);
 
 }

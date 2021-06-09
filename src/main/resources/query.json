@@ -1,25 +1,44 @@
 {
-  "queryType": "select",
-  "tableName": "products",
+  "queryType": "drop",
+  "columns": [
+    {
+      "tableName": "Products",
+      "column": "productID"
+    },
+    {
+      "tableName": "Products",
+      "column": "productName"
+    },
+    {
+      "tableName": "Products",
+      "column": "productPrice"
+    },
+    {
+      "tableName": "Stocks",
+      "column": "Availability"
+    }
+  ],
+  "primaryTableName": "products",
+  "secondaryTableName": "stocks",
   "isRequiredAllColumns": false,
   "isDistinctRequired": false,
-  "columns": [
-    "productID",
-    "productPrice"
-  ],
   "clauses": [
     {
-      "clauseType" : "where",
+      "clauseType": "where",
       "columns": [
-        "brandName"
+        {
+          "tableName": "Products",
+          "column": "productID"
+        }
       ]
     }
   ],
   "conditions": [
     {
-      "columnName": "productName",
+      "columnName": "productID",
       "operatorType": "equal_to",
-      "conditionValues": ["Coffee"]
+      "tableName" : "products",
+      "conditionValues" : ["50"]
     }
   ]
 }

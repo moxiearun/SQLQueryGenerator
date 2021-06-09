@@ -3,7 +3,9 @@ package Helpers;
 public class Constants {
     public static final String ALL_COLUMNS = "*";
     public static final String SPACE = " ";
+    public static final String DOT = ".";
     public static final String FROM = "FROM";
+    public static final String ON = "ON";
     public static final String TABLE = "TABLE";
     public static final String DISTINCT = "DISTINCT";
     public static final String COMMA = ",";
@@ -44,6 +46,8 @@ public class Constants {
     public static final String OPERATOR_LIKE = "LIKE";
     public static final String OPERATOR_IN = "IN";
     public static final String OPERATOR_BETWEEN = "BETWEEN";
+    public static final String OPERATOR_OR = "OR";
+    public static final String OPERATOR_AND = "AND";
 
     // Operator types
     public static final String OPERATOR_TYPE_EQUAL_TO = "equal_to";
@@ -55,5 +59,17 @@ public class Constants {
     public static final String OPERATOR_TYPE_LIKE = "like";
     public static final String OPERATOR_TYPE_IN = "in";
     public static final String OPERATOR_TYPE_BETWEEN = "between";
+
+    // Join types
+    public static final String JOIN_TYPE_INNER_JOIN = "inner_join";
+    public static final String JOIN_TYPE_LEFT_JOIN = "left_join";
+    public static final String JOIN_TYPE_RIGHT_JOIN = "right_join";
+    public static final String JOIN_TYPE_FULL_JOIN = "full_join";
+
+    // Joins
+    public static final String JOIN_INNER_JOIN = "INNER JOIN";
+    public static final String JOIN_LEFT_JOIN = "LEFT JOIN";
+    public static final String JOIN_RIGHT_JOIN = "RIGHT JOIN";
+    public static final String JOIN_FULL_JOIN = "FULL JOIN";
 
 }
