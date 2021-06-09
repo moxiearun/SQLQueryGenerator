@@ -59,6 +59,8 @@ public class Constants {
     public static final String OPERATOR_TYPE_LIKE = "like";
     public static final String OPERATOR_TYPE_IN = "in";
     public static final String OPERATOR_TYPE_BETWEEN = "between";
+    public static final String OPERATOR_TYPE_OR = "or";
+    public static final String OPERATOR_TYPE_AND = "and";
 
     // Join types
     public static final String JOIN_TYPE_INNER_JOIN = "inner_join";

@@ -5,6 +5,7 @@ import Helpers.Constants;
 import Interfaces.QueryDisplayListener;
 import Models.Clause;
 import Models.Column;
+import com.sun.tools.internal.jxc.ap.Const;
 
 import java.util.Iterator;
 import java.util.List;
@@ -126,7 +127,7 @@ public class QueryBuilder {
      *
      * @throws NoSuchClauseFoundException can be thrown when invalid clause type found in query inputs.
      */
-    public void appendClause(List<Clause> clauses) throws NoSuchClauseFoundException {
+    public void appendClause(List<Clause> clauses, boolean isTableNameRequired) throws NoSuchClauseFoundException {
         if (clauses == null || clauses.size() < 1) {
             return;
         }
@@ -138,11 +139,11 @@ public class QueryBuilder {
                     break;
                 case Constants.CLAUSE_TYPE_ORDER_BY:
                     sqlQueryBuilder.append(Constants.CLAUSE_ORDER_BY);
-                    appendColumnNames(clause.columns, false);
+                    appendColumnNames(clause.columns, isTableNameRequired);
                     break;
                 case Constants.CLAUSE_TYPE_GROUP_BY:
                     sqlQueryBuilder.append(Constants.CLAUSE_GROUP_BY);
-                    appendColumnNames(clause.columns, false);
+                    appendColumnNames(clause.columns, isTableNameRequired);
                     break;
                 case Constants.CLAUSE_TYPE_HAVING:
                     sqlQueryBuilder.append(Constants.CLAUSE_HAVING);
@@ -150,6 +151,14 @@ public class QueryBuilder {
                 default:
                     throw new NoSuchClauseFoundException(Constants.MESSAGE_NO_CLAUSE_FOUND_EXCEPTION);
             }
+        }
+    }
+
+    public void appendConditionOperators(String conditionOperator) {
+        if (conditionOperator.equals(Constants.OPERATOR_TYPE_AND)) {
+             sqlQueryBuilder.append(Constants.SPACE).append(Constants.OPERATOR_AND);
+        } else if (conditionOperator.equals(Constants.OPERATOR_TYPE_OR)) {
+            sqlQueryBuilder.append(Constants.SPACE).append(Constants.OPERATOR_OR);
         }
     }
 }

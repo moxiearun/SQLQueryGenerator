@@ -10,5 +10,6 @@ public class Condition {
     public String operatorType;
     public List<String> conditionValues;
     public String tableName;
+    public String conditionOperator;
     public Condition condition;
 }

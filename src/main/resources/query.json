@@ -1,10 +1,6 @@
 {
-  "queryType": "drop",
+  "queryType": "inner_join",
   "columns": [
-    {
-      "tableName": "Products",
-      "column": "productID"
-    },
     {
       "tableName": "Products",
       "column": "productName"
@@ -24,11 +20,11 @@
   "isDistinctRequired": false,
   "clauses": [
     {
-      "clauseType": "where",
+      "clauseType": "order_by",
       "columns": [
         {
           "tableName": "Products",
-          "column": "productID"
+          "column": "productName"
         }
       ]
     }
@@ -38,7 +34,10 @@
       "columnName": "productID",
       "operatorType": "equal_to",
       "tableName" : "products",
-      "conditionValues" : ["50"]
+      "condition" : {
+        "columnName": "stockID",
+        "tableName" : "stocks"
+      }
     }
   ]
 }

@@ -31,7 +31,7 @@ public class JoinQueryBuilder extends QueryBuilder {
             appendColumnName();
             appendPrimaryTableName();
             appendConditions(getJoinType());
-            appendClause(joinQueryInputs.clauses);
+            appendClause(joinQueryInputs.clauses, true);
             sqlQueryBuilder.append(Constants.SEMI_COLON);
             queryDisplayListener.displayConstructedQuery(sqlQueryBuilder.toString());
         } catch (NoSuchClauseFoundException noSuchClauseFoundException) {

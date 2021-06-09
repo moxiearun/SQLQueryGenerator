@@ -33,7 +33,7 @@ public class SelectQueryBuilder extends QueryBuilder {
             }
             appendColumnName();
             appendTableName();
-            appendClause(sqlSelectQueryInputs.clauses);
+            appendClause(sqlSelectQueryInputs.clauses, false);
             appendConditions();
             sqlQueryBuilder.append(Constants.SEMI_COLON);
             queryDisplayListener.displayConstructedQuery(sqlQueryBuilder.toString());
@@ -74,6 +74,9 @@ public class SelectQueryBuilder extends QueryBuilder {
             appendOperator(condition.operatorType);
             sqlQueryBuilder.append(Constants.SPACE);
             appendConditions(condition.operatorType, condition.conditionValues);
+            if (condition.conditionOperator != null) {
+                appendConditionOperators(condition.conditionOperator);
+            }
         }
     }
 }
